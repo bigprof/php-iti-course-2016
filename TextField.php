@@ -1,6 +1,6 @@
 <?php
 	class TextField{
-		private $name, $label, $validation, $error;
+		protected $name, $label, $validation, $error;
 		
 		public function __construct($config){
 			$this->name = $config['name'];
@@ -35,4 +35,8 @@
 				'">' . 
 				'<div class="error">' . $this->error . '</div>';
 		}
+	}
+	
+	class RadioButton extends TextField{
+		
 	}
