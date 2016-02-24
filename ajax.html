@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Title</title>
+
+		<!-- load js libs -->
+		<script src="jQuery.min.js"></script>
+		
+		<!-- load css -->
+		<link href="" rel="stylesheet" />
+
+		<!-- some page-specific js -->
+		<script>
+		</script>
+
+		<!-- some page-specific styling -->
+		<style>
+		</style>
+	</head>
+	<body>
+		
+		<select id="code-selector">
+			<option value="ABCD">ABCD</option>
+			<option value="WXYZ">WXYZ</option>
+			<option value="OPQR">OPQR</option>
+		</select>
+		
+		<div id="quote">Please wait ...</div>
+		<button id="more">Get more!</button>
+		<div id="hello">Hello every one!</div>
+		
+		<script>
+			$(function(){
+				/* jQuery is ready */
+				$('#hello').append('<br>jQuery is ready.');
+				
+				
+				$('#more').click(function(){
+					/* get content from ajax.php */
+					$.ajax({
+						url: "ajax.php",
+						success: function(resp){
+							$('#hello').append(resp);
+						},
+						error: function(){
+							alert("ajax request failed.");
+						}
+					});
+				});
+				
+				setInterval(function(){
+					$.ajax({
+						url: "quote.php",
+						data: {
+							code: $('#code-selector').val()
+						},
+						success: function(resp){
+							$('#quote').html(resp);
+						}
+					});
+				}, 1000);
+			});
+		</script>
+		
+	</body>
+</html>
